@@ -15,16 +15,19 @@ cursor = connection.cursor()
 def add_quote(quote):
     cursor.execute("INSERT INTO quotes VALUES(?)", (quote,))
     connection.commit()
-    pass
 
 def get_quote():
     cursor.execute("SELECT count(quote) FROM quotes")
     quoteCount = cursor.fetchall()[0][0]
     rand_index= random.randint(1, quoteCount)
+
     print(rand_index)
+
     cursor.execute("SELECT * FROM quotes WHERE quote_number = ?", (rand_index,))
     quoteRecord = cursor.fetchall()[0]
+
     print(quoteRecord)
+    
     return quoteRecord[1]
 
 intents = discord.Intents.default()
@@ -37,14 +40,9 @@ async def quote(interaction: discord.Interaction):
     await interaction.response.send_message(get_quote())
 
 @bot.event
-async def on_message(ctx):
-    pass
-
-@bot.event
 async def on_ready():
     await bot.tree.sync()
     print(f"Logged in as {bot.user}")
     
 keep_alive()
-print(os.getenv('API-TOKEN'))
 bot.run(str(os.getenv('API-TOKEN')))
