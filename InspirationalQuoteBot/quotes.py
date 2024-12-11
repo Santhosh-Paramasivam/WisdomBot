@@ -2,7 +2,7 @@ import sqlite3
 
 formatForDiscord = lambda string:string.removesuffix("\n").strip()
 
-connection = sqlite3.connect("inspirational_quotes.db")
+connection = sqlite3.connect("wise_quotes.db")
 cursor = connection.cursor()
 
 cursor.execute("DROP TABLE IF EXISTS quotes")
@@ -18,10 +18,10 @@ with open("quotes.txt", "r") as infile:
 
    count = 0
    for string in aQNewlineless:
-      stringList = [string]
+      # stringList = [string]
       cursor.execute("INSERT INTO quotes(quote) VALUES(?)",(string,))
       connection.commit()
-      print(stringList)
+      # print(stringList)
       count+=1
 
-   print(count)
+   # print(count)

@@ -1,6 +1,6 @@
 import sqlite3
 
-connection = sqlite3.connect("inspirational_quotes.db")
+connection = sqlite3.connect("wise_quotes.db")
 cursor = connection.cursor()
 
 cursor.execute("SELECT * FROM quotes")

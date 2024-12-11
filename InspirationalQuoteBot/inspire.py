@@ -9,7 +9,7 @@ import random
 
 load_dotenv()
 
-connection = sqlite3.connect("inspirational_quotes.db")
+connection = sqlite3.connect("wise_quotes.db")
 cursor = connection.cursor()
 
 def add_quote(quote):
@@ -21,12 +21,12 @@ def get_quote():
     quoteCount = cursor.fetchall()[0][0]
     rand_index= random.randint(1, quoteCount)
 
-    print(rand_index)
+    # print(rand_index)
 
     cursor.execute("SELECT * FROM quotes WHERE quote_number = ?", (rand_index,))
     quoteRecord = cursor.fetchall()[0]
 
-    print(quoteRecord)
+    # print(quoteRecord)
     
     return quoteRecord[1]
 
@@ -35,7 +35,7 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="/", intents=intents)
 
-@bot.tree.command(name="quote", description="Posts an inspirational quote")
+@bot.tree.command(name="quote", description="Posts a wise quote")
 async def quote(interaction: discord.Interaction):
     await interaction.response.send_message(get_quote())
 
